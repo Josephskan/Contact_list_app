@@ -32,9 +32,7 @@ class Contact
       # TODO: Select the Contact instances from the 'contacts.csv' file whose name or email attributes contain the search term.
     end
 
-  end
-
-  def self.start_up
+    def start_up
     puts
     puts "Here is a list of available commands:"
     puts
@@ -47,6 +45,10 @@ class Contact
     puts "\tsearch - Search contacts"
     puts
   end
+
+  end
+
+  
 
   Contact.start_up
 
