@@ -34,4 +34,20 @@ class Contact
 
   end
 
+  def self.start_up
+    puts
+    puts "Here is a list of available commands:"
+    puts
+    puts "\tnew - Create a new contact"
+    puts
+    puts "\tlist - List all contacts"
+    puts
+    puts "\tshow - Show a contact"
+    puts
+    puts "\tsearch - Search contacts"
+    puts
+  end
+
+  Contact.start_up
+
 end
