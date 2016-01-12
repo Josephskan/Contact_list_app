@@ -1,4 +1,5 @@
 require 'csv'
+require 'pry'
 
 
 # Represents a person in an address book.
@@ -16,12 +17,25 @@ class Contact
 
     # Returns an Array of Contacts loaded from the database.
     def all
-      puts "u have selected all"
-      contacts = CSV.read('./contacts.csv')
+      puts "You have selected list"
+      list = 0
       # TODO: Return an Array of Contact instances made from the data in 'contacts.csv'.
       CSV.foreach('./contacts.csv') do |row|
-        puts row.inspect
+        show = ''
+        row.each do |word|
+          if show == ''
+            show <<("#{word}, ")
+          else
+            show <<("(#{word})")
+          end
+        end
+        list += 1
+        puts "#{list}: #{show}"
       end
+      puts"-------------------------------------------------------"
+      puts "#{list} contacts on record"
+      puts
+      # binding.pry
     end
 
     # Creates a new contact, adding it to the database, returning the new contact.
