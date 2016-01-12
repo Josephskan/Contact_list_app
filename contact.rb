@@ -1,9 +1,11 @@
 require 'csv'
 
+
 # Represents a person in an address book.
 class Contact
 
   attr_accessor :name, :email
+  
 
   def initialize(name, email)
     # TODO: Assign parameter values to instance variables.
@@ -14,7 +16,12 @@ class Contact
 
     # Returns an Array of Contacts loaded from the database.
     def all
+      puts "u have selected all"
+      contacts = CSV.read('./contacts.csv')
       # TODO: Return an Array of Contact instances made from the data in 'contacts.csv'.
+      CSV.foreach('./contacts.csv') do |row|
+        puts row.inspect
+      end
     end
 
     # Creates a new contact, adding it to the database, returning the new contact.
@@ -44,6 +51,18 @@ class Contact
     puts
     puts "\tsearch - Search contacts"
     puts
+
+    cmd = gets.chomp
+    case cmd
+    when "new"
+      self.create ()
+    when "list"
+      self.all
+    when "show"
+      self.find()
+    when "search"
+      self.search()
+    end
   end
 
   end
