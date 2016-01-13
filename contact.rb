@@ -9,6 +9,9 @@ class Contact
   
 
   def initialize(name, email)
+    CSV.open('./contacts.csv','a') do |csv|
+        csv << [name, email]
+    end
     # TODO: Assign parameter values to instance variables.
   end
 
@@ -18,28 +21,23 @@ class Contact
     # Returns an Array of Contacts loaded from the database.
     def all
       puts "You have selected list"
-      list = 0
+      count = 0
       # TODO: Return an Array of Contact instances made from the data in 'contacts.csv'.
       CSV.foreach('./contacts.csv') do |row|
-        show = ''
-        row.each do |word|
-          if show == ''
-            show <<("#{word}, ")
-          else
-            show <<("(#{word})")
-          end
-        end
-        list += 1
-        puts "#{list}: #{show}"
+        line = "#{row[0]}, (#{row[1]})"
+        count += 1
+        puts "#{count}: #{line}"
       end
       puts"-------------------------------------------------------"
-      puts "#{list} contacts on record"
+      puts "#{count} contacts on record"
       puts
       # binding.pry
     end
 
     # Creates a new contact, adding it to the database, returning the new contact.
     def create(name, email)
+      Contact.new(name, email)
+
       # TODO: Instantiate a Contact, add its data to the 'contacts.csv' file, and return it.
     end
 
@@ -69,7 +67,11 @@ class Contact
     cmd = gets.chomp
     case cmd
     when "new"
-      self.create ()
+      puts "please enter contact full name:"
+      name = gets.chomp
+      puts "now enter contact's email"
+      email = gets.chomp
+      self.create(name, email)
     when "list"
       self.all
     when "show"
