@@ -55,13 +55,13 @@ class Contact
       contact
       # TODO: Find the Contact in the 'contacts.csv' file with the matching id.
     end
-
     # Returns an array of contacts who match the given term.
     def search(term)
       listing = ''
       CSV.foreach('./contacts.csv') do |row|
         line = "#{row[0]}, (#{row[1]})"
-        if line.match(/.*#{term}.*/)  
+        # line.downcase
+        if line.downcase.match(/.*#{term.downcase}.*/)  
           listing << "\n#{row[0]}, (#{row[1]})"
         end
       end
